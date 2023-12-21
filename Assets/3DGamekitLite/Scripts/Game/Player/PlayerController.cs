@@ -56,7 +56,7 @@ namespace Gamekit3D
         protected Damageable m_Damageable;             // Reference used to set invulnerablity and health based on respawning.
         protected Renderer[] m_Renderers;              // References used to make sure Renderers are reset properly. 
         protected Checkpoint m_CurrentCheckpoint;      // Reference used to reset Ellen to the correct position on respawn.
-        protected bool m_Respawning;                   // Whether Ellen is currently respawning.
+        protected bool m_Respawning = false;           // Whether Ellen is currently respawning.
         protected float m_IdleTimer;                   // Used to count up to Ellen considering a random idle.
 
         // These constants are used to ensure Ellen moves and behaves properly.
