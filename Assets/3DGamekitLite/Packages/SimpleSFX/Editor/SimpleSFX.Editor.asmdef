@@ -1,0 +1,19 @@
+{
+    "name": "SimpleSFX.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:288c58114193fde4cb93fb1f607c990f",
+        "GUID:a87fa9bfba4d14ea5b8bea1779ff4f6d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

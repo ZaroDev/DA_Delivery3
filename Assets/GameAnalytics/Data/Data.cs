@@ -8,6 +8,7 @@ namespace GameAnalytics.Data
     {
         public uint id;
         public Action<uint> callback;
+        public bool requiresResponse = false;
         public virtual void OnCreate(uint id = 0) { }
     }
 
@@ -34,8 +35,6 @@ namespace GameAnalytics.Data
     {
         public string startTime;
         public string endTime;
-
-        private bool _end = false;
         public SessionData(DateTime time)
         {
             this.startTime = time.ToString("yyyy-MM-dd HH:mm:ss");
