@@ -13,17 +13,24 @@ namespace GameAnalytics.Tooling
         private enum GetterType : int
         {
             GetPaths,
+            GetDeaths,
         }
         private static readonly Dictionary<GetterType, string> Urls = new()
         {
             { GetterType.GetPaths, "https://citmalumnes.upc.es/~victorfz/GetAllPaths.php" },
+            { GetterType.GetDeaths, "https://citmalumnes.upc.es/~victorfz/GetAllDeaths.php"}
         };
 
         public static void GetPaths(Action<string> callback)
         {
             GetData(Urls[GetterType.GetPaths], callback);
         }
-
+        
+        public static void GetDeaths(Action<string> callback)
+        {
+            GetData(Urls[GetterType.GetDeaths], callback);
+        }
+        
         private static void GetData(string url, Action<string>callback)
         {
             EditorCoroutineUtility.StartCoroutineOwnerless(GetDataRoutine(url, callback));
