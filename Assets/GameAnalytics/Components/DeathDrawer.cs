@@ -23,15 +23,15 @@ namespace GameAnalytics.Components
             foreach (var death in Deaths)
             {
                 if(!death.Show)
+                { 
                     continue;
+                }
                 
                 foreach (var pos in death.Positions)
                 {
-                    Gizmos.DrawIcon(pos, "GameAnalytics/SkullGizmo.png", true, death.Color);
+                    Gizmos.DrawIcon(new Vector3(pos.x, pos.y + 1f, pos.z), "GameAnalytics/SkullGizmo.png", true, death.Color);
                 }
             }
-            
-           
         }
     }
 }

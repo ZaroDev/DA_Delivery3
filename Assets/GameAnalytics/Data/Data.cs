@@ -9,7 +9,10 @@ namespace GameAnalytics.Data
         public uint id;
         public Action<uint> callback;
         public bool requiresResponse = false;
-        public virtual void OnCreate(uint id = 0) { }
+        public virtual void OnCreate(uint id = 0) 
+        { 
+            callback?.Invoke(id);
+        }
     }
 
     [System.Serializable]
@@ -20,6 +23,7 @@ namespace GameAnalytics.Data
         {
             this.id = id;
             this.name = name;
+            requiresResponse = true;
         }
 
         public override void OnCreate(uint id = 0)

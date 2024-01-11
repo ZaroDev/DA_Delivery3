@@ -43,7 +43,7 @@ namespace GameAnalytics.Tooling.Editor
                 p.Color = Random.ColorHSV();
                 p.PlayerId = group.Key.player_id;
                 p.SessionId = group.Key.session_id;
-
+                p.Show = true;
                 p.Positions = group.ToArray().Select(json => new Vector3(json.x, json.y, json.z)).ToArray();
                 
                 Paths.Add(p);

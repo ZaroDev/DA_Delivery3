@@ -139,7 +139,7 @@ namespace GameAnalytics.Data
 
             var serverResponse = JsonUtility.FromJson<Data>(response);
             // Wait for unity to dispose everything
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.5f);
             data.OnCreate(serverResponse.id);
         }
 

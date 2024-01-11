@@ -35,10 +35,12 @@ namespace GameAnalytics
 #if UNITY_EDITOR
         public void RequestID()
         {
+            Debug.Log("Id request");
             var playerData = new PlayerData(0, gameObject.name);
             playerData.callback += (uint newId) =>
             {
                 this.id = newId;
+                Debug.Log($"Set player with name {gameObject.name} ID: {newId}");
                 PrefabUtility.RecordPrefabInstancePropertyModifications(this);
             };
 

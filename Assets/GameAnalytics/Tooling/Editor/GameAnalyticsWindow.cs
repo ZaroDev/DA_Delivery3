@@ -7,6 +7,7 @@ namespace GameAnalytics.Tooling.Editor
     {
         private static bool _showDeaths = false;
         private static bool _showPaths = false;
+        private static int _session = -1;
         private static Vector2 _scrollPos = new();
         [MenuItem("Game Analytics/Panel")]
         public static void ShowWindow()
@@ -19,7 +20,16 @@ namespace GameAnalytics.Tooling.Editor
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
             
             EditorGUILayout.LabelField("Paths");
-            
+            EditorGUILayout.LabelField("Session Id");
+           
+            var newSession = EditorGUILayout.IntField(_session);
+            if(_session != newSession)
+            {
+                _session = newSession;
+
+            }
+
+
             if(GUILayout.Button("Gather and generate paths"))
             {
                 PathAnalyticsManager.GetPathData();
@@ -32,6 +42,7 @@ namespace GameAnalytics.Tooling.Editor
 
             if (PathAnalyticsManager.Paths.Count != 0)
             {
+                EditorGUILayout.LabelField($"Path count: {PathAnalyticsManager.Paths.Count}");
                 _showPaths = EditorGUILayout.BeginFoldoutHeaderGroup(_showPaths, "Paths");
                 if (_showPaths)
                 {
@@ -61,6 +72,7 @@ namespace GameAnalytics.Tooling.Editor
             
             if (DeathAnalyticsManager.Drawer != null)
             {
+                EditorGUILayout.LabelField($"Death count {DeathAnalyticsManager.Drawer.Deaths.Count}");
                 _showDeaths = EditorGUILayout.BeginFoldoutHeaderGroup(_showDeaths, "Deaths");
                 if (_showDeaths)
                 {

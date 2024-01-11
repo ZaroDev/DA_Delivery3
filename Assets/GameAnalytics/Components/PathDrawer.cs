@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.Splines;
-using Random = UnityEngine.Random;
-using Unity.Mathematics;
 using UnityEditor;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GameAnalytics.Components
 {
@@ -21,15 +18,18 @@ namespace GameAnalytics.Components
     [ExecuteAlways]
     public class PathDrawer : MonoBehaviour
     {
+#if UNITY_EDITOR
         public List<Path> paths = new();
         private void OnDrawGizmos()
         {
             foreach (var path in paths.Where(path => path.Show))
             {
-                Gizmos.color = path.Color;
-                Gizmos.DrawLineList(path.Positions);
+                Handles.color = path.Color;
+                Gizmos.DrawIcon(path.Positions.First(), "GameAnalytics/StartGizmo.png", true, path.Color);
+                Handles.DrawAAPolyLine(path.Positions);
+                Gizmos.DrawIcon(path.Positions.Last(), "GameAnalytics/EndGizmo.png", true, path.Color);
             }
         }
-
+#endif
     }
 }

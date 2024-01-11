@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GameAnalytics.Tooling
@@ -11,12 +12,7 @@ namespace GameAnalytics.Tooling
         [MenuItem("Game Analytics/Fill player Ids")]
         public static void FillPlayerIDs()
         {
-            var scene = SceneManager.GetActiveScene();
-            var rootGOs = scene.GetRootGameObjects();
-
-            var entityTrackers = rootGOs.Select(rootGo => rootGo.GetComponent<EntityTracker>())
-                                                        .Where(tracker => tracker != null)
-                                                        .ToList();
+            var entityTrackers = GameObject.FindObjectsByType<EntityTracker>(FindObjectsSortMode.None);
 
             foreach (var entityTracker in entityTrackers)
             {
