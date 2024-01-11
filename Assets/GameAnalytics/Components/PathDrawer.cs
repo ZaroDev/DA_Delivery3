@@ -19,10 +19,10 @@ namespace GameAnalytics.Components
     public class PathDrawer : MonoBehaviour
     {
 #if UNITY_EDITOR
-        public List<Path> paths = new();
+        public List<Path> Paths = new();
         private void OnDrawGizmos()
         {
-            foreach (var path in paths.Where(path => path.Show))
+            foreach (var path in Paths.Where(path => path.Show))
             {
                 Handles.color = path.Color;
                 Gizmos.DrawIcon(path.Positions.First(), "GameAnalytics/StartGizmo.png", true, path.Color);

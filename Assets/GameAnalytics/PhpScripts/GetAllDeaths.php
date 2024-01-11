@@ -16,7 +16,7 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Replace "YourTableName" with the actual table name
-        $sql = "SELECT `player_id`, `x`, `y`, `z` FROM player_deaths";
+        $sql = "SELECT `player_id`, `session_id`, `x`, `y`, `z` FROM player_deaths";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

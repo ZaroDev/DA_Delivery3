@@ -9,6 +9,7 @@ namespace GameAnalytics.Tooling.Editor
     public class DeathJSONData
     {
         public int player_id;
+        public int session_id;
         public float x;
         public float y;
         public float z;
@@ -21,10 +22,15 @@ namespace GameAnalytics.Tooling.Editor
     public static class DeathAnalyticsManager
     {
         public static DeathDrawer Drawer;
+        public static GameObject DeathDrawerGO;
 
         public static void ClearDeaths()
         {
-            Object.DestroyImmediate(Drawer.gameObject);
+            if (DeathDrawerGO != null)
+            {
+                Drawer.Deaths.Clear();
+                Object.DestroyImmediate(DeathDrawerGO);
+            }
         }
         
         public static void GatherAllData()
@@ -36,16 +42,18 @@ namespace GameAnalytics.Tooling.Editor
             var deaths = JsonUtility.FromJson<DeathJSONs>(jsonString);
             
             var groupedDeaths = deaths.deaths.GroupBy(death => death.player_id);
-            
-            var go = new GameObject("Death Drawer");
-            Drawer = go.AddComponent<DeathDrawer>();
-            
+            if (Drawer == null)
+            {
+                var go = GameObject.Instantiate(DeathDrawerGO);
+                Drawer = go.GetComponent<DeathDrawer>();
+            }
+
             foreach (var death in groupedDeaths)
             {
                 var d = new PlayerDeaths
                 {
                     Color = Random.ColorHSV(),
-                    Id = death.Key
+                    Id = death.Key,
                 };
                 var deathData = death.ToList();
                 foreach (var deathJsonData in deathData)
@@ -54,6 +62,9 @@ namespace GameAnalytics.Tooling.Editor
                 }
                 Drawer.Deaths.Add(d);
             }
+
+            GameAnalyticsWindow.AllDeaths = Drawer.Deaths;
+            Drawer.Init();
         }
     }
 }
